@@ -18,7 +18,7 @@ import java.util.Set;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping
+@RequestMapping("/github-details")
 public class RepoDetailsController {
     private final RepoDetailsService repoDetailsService;
 
