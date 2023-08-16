@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 import sebastianroza.com.example.RepoDetails.model.RepoDTO;
 import sebastianroza.com.example.RepoDetails.service.RepoDetailsService;
 
-import java.io.IOException;
 import java.util.Set;
 
 @RestController
@@ -28,12 +27,18 @@ public class RepoDetailsController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = RepoDTO.class))}),
             @ApiResponse(responseCode = "400", description = "Repositories not fetched and not displayed",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class))
-                    })})
-    @GetMapping("/{email}")
-    Set<RepoDTO> fetchUserRepositories(@PathVariable String email) throws IOException {
-        return repoDetailsService.fetchUserRepositories(email);
+                    content = @Content),
+            @ApiResponse(responseCode = "404", description = "Repo not found",
+                    content = @Content),
+            @ApiResponse(responseCode = "403", description = "Repo forbidden",
+                    content = @Content),
+            @ApiResponse(responseCode = "301", description = "Repo moved permanently",
+                    content = @Content),
+
+    })
+    @GetMapping("/{username}")
+    Set<RepoDTO> fetchUserRepositories(@PathVariable String username) {
+        return repoDetailsService.fetchUserRepositories(username);
     }
 
     @Operation(summary = "Get info about specific user repository (input=name of repository)")
@@ -42,11 +47,9 @@ public class RepoDetailsController {
                     content = {@Content(mediaType = "application/json",
                             schema = @Schema(implementation = RepoDTO.class))}),
             @ApiResponse(responseCode = "400", description = "Repositories not fetched and not displayed",
-                    content = {@Content(mediaType = "application/json",
-                            schema = @Schema(implementation = String.class))
-                    })})
-    @GetMapping("/{email}/{repoName}")
-    RepoDTO getRepositoryInfo(@PathVariable String email, @PathVariable String repoName) throws IOException {
-        return repoDetailsService.getRepositoryInfo(email, repoName);
+                    content = @Content)})
+    @GetMapping("/{username}/{repoName}")
+    RepoDTO getRepositoryInfo(@PathVariable String username, @PathVariable String repoName) {
+        return repoDetailsService.getRepositoryInfo(username, repoName);
     }
 }
