@@ -7,7 +7,7 @@ import sebastianroza.com.example.RepoDetails.model.RepoDTO;
 
 import java.util.Set;
 
-@FeignClient(value = "GitHubUserInfo", url = "https://api.github.com")
+@FeignClient(value = "GitHubUserInfo", url = "${github.api.client.url}")
 public interface RepoDetailsClient {
     @GetMapping(value = "/users/{username}/repos")
     Set<RepoDTO> fetchUserRepositories(@PathVariable String username);
