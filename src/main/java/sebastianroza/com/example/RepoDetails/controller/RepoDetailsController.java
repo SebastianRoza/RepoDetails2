@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sebastianroza.com.example.RepoDetails.model.RepoDTO;
+import sebastianroza.com.example.RepoDetails.model.dto.RepoDTO;
 import sebastianroza.com.example.RepoDetails.service.RepoDetailsService;
 
 import java.util.Set;
